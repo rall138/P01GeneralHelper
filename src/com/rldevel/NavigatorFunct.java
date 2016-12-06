@@ -1,7 +1,12 @@
 package com.rldevel;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -27,7 +32,7 @@ public class NavigatorFunct{
 
 	private String packageName;
 	private String className;
-	private File mappingFile = new File(PatternConsole.currentDirectory+"/patternfolder/Mapper.xml");
+	private File mappingFile = new File(InitializeRequired.currentDirectory+"/patternfolder/Mapper.xml");
 	
 	public NavigatorFunct(String packageName, String className) {
 		this.packageName = packageName;
@@ -84,4 +89,32 @@ public class NavigatorFunct{
 		}
 	}
 	
+	private List<String> getClassesFromModelPropertie() throws IOException{
+		ArrayList<String> classList = new ArrayList<>();
+		Properties prop = new Properties();
+		InputStream is = new FileInputStream(this.getPropertiesPath()); 
+		prop.load(is);
+		String model_path = prop.getProperty("model_path");
+		File model_directory = new File(model_path);
+		if (model_directory.exists()){
+			for (String file_name : model_directory.list()){
+				if (file_name.endsWith(".java"))
+					classList.add(file_name);
+			}
+		}
+		return classList;
+	}
+
+	private String getPropertiesPath(){
+		File file = new File(currentDirectory+System.getProperty("file.separator")+"Pattern01.properties");
+		System.out.println(file.getAbsolutePath());
+		try {
+			if (!file.exists())
+				file.createNewFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return file.getAbsolutePath();
+	}
+
 }
