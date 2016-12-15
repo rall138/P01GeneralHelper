@@ -11,9 +11,11 @@ public class InitializeRequired {
 
 	public static String currentDirectory = getCurrentPath();
 	public static final String sys_sep = System.getProperty("file.separator");
+	public static final InitializeRequired req = new InitializeRequired();
 	
-	public InitializeRequired() throws IOException{
-		
+	public InitializeRequired(){}
+	
+	public static void initilize() throws IOException{
 		// Patternfolder directory creation
 		if (!(new File(sys_sep+"patternfolder").exists()))
 			new File(sys_sep+"patternfolder").mkdir();
@@ -22,9 +24,9 @@ public class InitializeRequired {
 		File mapper = new File(currentDirectory+sys_sep+"patternfolder"+sys_sep+"Mapper.xml");
 		if (!mapper.exists()){
 			mapper.createNewFile();
-			readMapperTemplate(mapper);
+			req.readMapperTemplate(mapper);
 		}
-
+		
 	}
 	
 	private void readMapperTemplate(File mapper) throws IOException{
@@ -51,7 +53,5 @@ public class InitializeRequired {
 		}
 		return currentPath;
 	}
-
-	
 
 }

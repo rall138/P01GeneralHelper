@@ -89,7 +89,7 @@ public class NavigatorFunct{
 		}
 	}
 	
-	private List<String> getClassesFromModelPropertie() throws IOException{
+	private List<String> getClassesFromModelProperties() throws IOException{
 		ArrayList<String> classList = new ArrayList<>();
 		Properties prop = new Properties();
 		InputStream is = new FileInputStream(this.getPropertiesPath()); 
@@ -106,8 +106,8 @@ public class NavigatorFunct{
 	}
 
 	private String getPropertiesPath(){
-		File file = new File(currentDirectory+System.getProperty("file.separator")+"Pattern01.properties");
-		System.out.println(file.getAbsolutePath());
+		File file = new File(InitializeRequired.currentDirectory
+				+System.getProperty("file.separator")+"Pattern01.properties");
 		try {
 			if (!file.exists())
 				file.createNewFile();
