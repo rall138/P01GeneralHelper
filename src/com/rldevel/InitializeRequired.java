@@ -17,8 +17,8 @@ public class InitializeRequired {
 	
 	public static void initilize() throws IOException{
 		// Patternfolder directory creation
-		if (!(new File(sys_sep+"patternfolder").exists()))
-			new File(sys_sep+"patternfolder").mkdir();
+		if (!(new File(currentDirectory+sys_sep+"patternfolder").exists()))
+			new File(currentDirectory+sys_sep+"patternfolder").mkdir();
 		
 		// Mapper.xml file creation
 		File mapper = new File(currentDirectory+sys_sep+"patternfolder"+sys_sep+"Mapper.xml");
